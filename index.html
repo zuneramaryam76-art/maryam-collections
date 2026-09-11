@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Maryam Collection | Fine Jewellery, Atelier & Luxury Boutique</title>
+  <meta name="description" content="The Maryam Collection - Fine Jewellery for Women, Modest Grace Collection, Men's Atelier & Cute Kids Jewels. Handcrafted B.Tech Mini Project supervised by Team Leader Shaik Zunera Maryam.">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar for Team Leader & Professor Presentation -->
+  <div class="team-leader-bar">
+    <div class="tl-bar-content">
+      <span><i class="fa-solid fa-crown gold-pulse"></i> <strong>TEAM LEADER EDITION</strong> • Project Head: <strong>Shaik Zunera Maryam</strong></span>
+      <span class="tl-sub-badge"><i class="fa-solid fa-graduation-cap"></i> B.Tech Mini Project • Atelier Management System</span>
+      <button class="btn-leader-modal" onclick="App.showTeamLeaderInfo()"><i class="fa-solid fa-award"></i> Leader's Showcase</button>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="brand-logo" onclick="App.switchView('shop')">
+      <div class="brand-icon">M</div>
+      <div>
+        <div class="brand-name">THE MARYAM COLLECTION</div>
+        <span class="brand-sub">Luxury Jewellery Atelier • Multi-Demographic Edition</span>
+      </div>
+    </div>
+
+    <!-- CUSTOMER VIEW NAVIGATION LINKS -->
+    <ul id="customer-nav" class="nav-links">
+      <li>
+        <a class="nav-link active" onclick="App.switchView('shop')">
+          <i class="fa-solid fa-gem"></i> Collections & Boutique
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" onclick="App.switchView('customizer')">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Laser Studio
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" onclick="App.switchView('cart')">
+          <i class="fa-solid fa-bag-shopping"></i> Shopping Bag
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" onclick="App.switchView('tracking')">
+          <i class="fa-solid fa-truck-fast"></i> Order Tracking
+        </a>
+      </li>
+    </ul>
+
+    <!-- ADMIN VIEW NAVIGATION LINKS (Hidden by default) -->
+    <ul id="admin-nav" class="nav-links" style="display: none;">
+      <li>
+        <a class="nav-link" onclick="App.switchView('inventory')">
+          <i class="fa-solid fa-boxes-stacked"></i> Stock Registry (CRUD)
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" onclick="App.switchView('analytics')">
+          <i class="fa-solid fa-chart-line"></i> Sales & Demographics CRM
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right Header Actions -->
+    <div class="nav-actions">
+      <button class="badge-btn" onclick="App.switchView('cart')" title="Shopping Bag">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="count-pill">0</span>
+      </button>
+      
+      <button class="badge-btn" onclick="App.switchView('shop')" title="Wishlist">
+        <i class="fa-regular fa-heart"></i>
+        <span id="wish-count" class="count-pill">0</span>
+      </button>
+
+      <!-- Portal Mode Switch Button -->
+      <button id="portal-btn" class="btn-outline-gold" onclick="App.togglePortalMode()" style="font-size: 0.78rem; padding: 0.4rem 0.8rem;">
+        <i class="fa-solid fa-user-gear"></i> <span id="portal-btn-text">Admin Portal</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- VIEW 1: SHOP CATALOG (Customer View) -->
+    <section id="sec-shop" class="view-section active">
+      <!-- Hero Banner -->
+      <div class="hero-box">
+        <div class="hero-badge">
+          <i class="fa-solid fa-certificate"></i> BIS Hallmarked • Certified Diamonds • GIA Accredited
+        </div>
+        <h1 class="hero-title">Royal Heritage & <span class="gold-gradient-text">Timeless Elegance</span></h1>
+        <p class="hero-desc">
+          Crafted with passion under the leadership of <strong>Shaik Zunera Maryam</strong>. Discover fine jewelry curated for <strong>Women</strong>, our exclusive <strong>Modest Grace Collection</strong>, majestic <strong>Men's Atelier</strong>, and charming <strong>Kids' Cute Jewels</strong>.
+        </p>
+        
+        <!-- Demographic Quick Jump Banners -->
+        <div class="demo-cards-row">
+          <div class="demo-card demo-women" onclick="App.filterDemographic('Women')">
+            <div class="demo-icon"><i class="fa-solid fa-crown"></i></div>
+            <div class="demo-title">Women's Fine Jewellery</div>
+            <div class="demo-sub">Solitaires, Pearls & Emeralds</div>
+          </div>
+          <div class="demo-card demo-modest" onclick="App.filterDemographic('Modest')">
+            <div class="demo-icon"><i class="fa-solid fa-sparkles"></i></div>
+            <div class="demo-title">✨ Modest Collection</div>
+            <div class="demo-sub">Hijab Pins, Crescent Brooches & Grace Chains</div>
+          </div>
+          <div class="demo-card demo-men" onclick="App.filterDemographic('Men')">
+            <div class="demo-icon"><i class="fa-solid fa-user-ninja"></i></div>
+            <div class="demo-title">🤵 Men's Atelier</div>
+            <div class="demo-sub">Onyx Signets, Cufflinks & Platinum Chains</div>
+          </div>
+          <div class="demo-card demo-kids" onclick="App.filterDemographic('Kids')">
+            <div class="demo-icon"><i class="fa-solid fa-baby"></i></div>
+            <div class="demo-title">🧸 Kids & Cute Jewels</div>
+            <div class="demo-sub">Bunny Studs, Baby Bangles & Charms</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+          <button class="btn-gold" onclick="window.scrollTo({top: 550, behavior: 'smooth'})"><i class="fa-solid fa-gem"></i> Explore Catalog</button>
+          <button class="btn-outline-gold" onclick="App.switchView('customizer')"><i class="fa-solid fa-wand-magic-sparkles"></i> Try Laser Studio</button>
+        </div>
+      </div>
+
+      <!-- Main Demographic Filter Tabs Bar -->
+      <div class="demographic-tabs-container">
+        <div class="demographic-tabs">
+          <button class="demo-tab-btn active" data-demo="All" onclick="App.filterDemographic('All')">
+            <i class="fa-solid fa-shapes"></i> All Collections
+          </button>
+          <button class="demo-tab-btn" data-demo="Women" onclick="App.filterDemographic('Women')">
+            <i class="fa-solid fa-female"></i> Women's Collection
+          </button>
+          <button class="demo-tab-btn highlight-modest" data-demo="Modest" onclick="App.filterDemographic('Modest')">
+            <i class="fa-solid fa-moon"></i> ✨ Modest Collection
+          </button>
+          <button class="demo-tab-btn" data-demo="Men" onclick="App.filterDemographic('Men')">
+            <i class="fa-solid fa-user-tie"></i> 🤵 Men's Atelier
+          </button>
+          <button class="demo-tab-btn highlight-kids" data-demo="Kids" onclick="App.filterDemographic('Kids')">
+            <i class="fa-solid fa-heart"></i> 🧸 Kids' Cute Collection
+          </button>
+        </div>
+      </div>
+
+      <!-- Secondary Category & Search Filters Bar -->
+      <div class="filter-bar">
+        <div class="pills-group">
+          <button class="pill-btn active" data-cat="All">All Categories</button>
+          <button class="pill-btn" data-cat="Rings">Rings</button>
+          <button class="pill-btn" data-cat="Necklaces">Necklaces</button>
+          <button class="pill-btn" data-cat="Earrings">Earrings</button>
+          <button class="pill-btn" data-cat="Bracelets">Bracelets</button>
+          <button class="pill-btn" data-cat="Pins & Brooches">Pins & Brooches</button>
+          <button class="pill-btn" data-cat="Cufflinks & Bands">Cufflinks & Accessories</button>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <select id="metal-filter-select" class="metal-select" onchange="App.filterMetal(this.value)">
+            <option value="All">✨ All Metals</option>
+            <option value="18K Gold">18K Gold</option>
+            <option value="24K Gold">24K Solid Gold</option>
+            <option value="Rose Gold">Rose Gold</option>
+            <option value="Platinum">950 Platinum</option>
+            <option value="Sterling Silver">Sterling Silver</option>
+          </select>
+
+          <input type="text" id="search-inp" class="search-input" placeholder="Search ruby, hijab pin, onyx, bunny studs...">
+        </div>
+      </div>
+
+      <!-- Active Filter Status Indicator -->
+      <div id="filter-status-banner" class="filter-status-banner" style="display: none;">
+        <span>Showing: <strong id="current-filter-name" style="color: var(--gold-primary);">All Items</strong></span>
+        <button class="btn-clear-filter" onclick="App.resetFilters()"><i class="fa-solid fa-xmark"></i> Clear Filters</button>
+      </div>
+
+      <!-- Catalog Grid -->
+      <div id="catalog-grid" class="products-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: PRODUCT CUSTOMIZER (Customer View) -->
+    <section id="sec-customizer" class="view-section">
+      <div id="customizer-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: SHOPPING BAG & INVOICE (Customer View) -->
+    <section id="sec-cart" class="view-section">
+      <div id="cart-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: CUSTOMER ORDER TRACKING (Customer View) -->
+    <section id="sec-tracking" class="view-section">
+      <div style="max-width: 720px; margin: 2rem auto; background: var(--bg-surface); border: 1px solid var(--border-gold); border-radius: var(--radius-md); padding: 2.2rem; text-align: center; box-shadow: var(--shadow-card);">
+        <i class="fa-solid fa-truck-fast" style="font-size: 3.2rem; color: var(--gold-primary); margin-bottom: 1rem;"></i>
+        <h2 style="font-family: var(--font-heading); font-size: 2.3rem; margin-bottom: 0.5rem;">Track Your Maryam Collection Order</h2>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.8rem;">Enter your Order Reference Number to inspect real-time crafting & insured delivery timeline.</p>
+        
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 2rem;">
+          <input type="text" id="track-inp" placeholder="e.g. ORD-9481" style="background: var(--bg-main); border: 1px solid var(--border-gold); color: #fff; padding: 0.75rem 1.2rem; border-radius: var(--radius-sm); font-size: 1rem; width: 260px; text-transform: uppercase;">
+          <button class="btn-gold" onclick="App.trackOrderSearch()"><i class="fa-solid fa-magnifying-glass"></i> Inspect Order</button>
+        </div>
+
+        <div id="track-res" style="display: none; text-align: left; background: var(--bg-main); padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold);">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: STOCK REGISTRY (Admin View) -->
+    <section id="sec-inventory" class="view-section">
+      <div id="inventory-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- VIEW 6: SALES ANALYTICS & CRM (Admin View) -->
+    <section id="sec-analytics" class="view-section">
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-gold); border-radius: var(--radius-md); padding: 1.8rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--gold-primary); margin-bottom: 1.2rem;">
+            Monthly Sales Trend ($ USD) • Team Atelier Dashboard
+          </h3>
+          <div style="height: 230px; display: flex; align-items: flex-end; gap: 1.5rem; padding-top: 1rem; border-bottom: 1px solid var(--border-subtle);">
+            <div style="flex: 1; background: rgba(212,175,55,0.2); height: 40%; border-radius: 4px 4px 0 0; text-align: center; color: var(--text-muted); font-size: 0.75rem;">Mar</div>
+            <div style="flex: 1; background: rgba(212,175,55,0.4); height: 60%; border-radius: 4px 4px 0 0; text-align: center; color: var(--text-muted); font-size: 0.75rem;">Apr</div>
+            <div style="flex: 1; background: rgba(212,175,55,0.6); height: 50%; border-radius: 4px 4px 0 0; text-align: center; color: var(--text-muted); font-size: 0.75rem;">May</div>
+            <div style="flex: 1; background: rgba(212,175,55,0.8); height: 85%; border-radius: 4px 4px 0 0; text-align: center; color: var(--text-muted); font-size: 0.75rem;">Jun</div>
+            <div style="flex: 1; background: var(--gold-gradient); height: 100%; border-radius: 4px 4px 0 0; text-align: center; color: #000; font-weight: 700; font-size: 0.75rem;">Jul</div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-gold); border-radius: var(--radius-md); padding: 1.8rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--gold-primary); margin-bottom: 1.2rem;">
+            Demographic Share
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 1.1rem; font-size: 0.9rem;">
+            <div>💃 Women's Fine Jewellery: <strong style="color: var(--gold-primary);">40%</strong></div>
+            <div>✨ Modest Grace Collection: <strong style="color: #67e8f9;">25%</strong></div>
+            <div>🤵 Men's Atelier: <strong style="color: var(--gold-primary);">20%</strong></div>
+            <div>🧸 Kids' Cute Collection: <strong style="color: #f472b6;">15%</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Universal Modal -->
+  <div id="modal-mask" class="modal-mask">
+    <div class="modal-body">
+      <button onclick="App.closeModal()" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: #aaa; font-size: 1.4rem; cursor: pointer; z-index: 10;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast Box -->
+  <div id="toast-box" class="toast-box"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
